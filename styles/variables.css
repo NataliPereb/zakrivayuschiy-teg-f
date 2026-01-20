@@ -15,6 +15,8 @@
             transparent 2px,
             transparent 4px),
     linear-gradient(180deg, #E7E7E7 0%, #1A1A1A 100%);
+    --font-weight-text: 410; 
+    --font-weight-title: 715; 
     --inline-size: min(100vw, 700px);
     --shadow-focus: 2px 2px 0 var(--accent-color);
     --accent-color: #000000;

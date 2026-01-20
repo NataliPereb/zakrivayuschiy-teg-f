@@ -13,7 +13,7 @@
   min-inline-size: 320px;
   min-block-size: 100dvb;
   font-family: var(--main-font, sans-serif);
-  font-variation-settings: 410;
+  font-variation-settings: 'wght' var(--font-weight-text, 400);
   background-image: var(--gradient-background);
   background-attachment: fixed;
   background-size: cover;
@@ -27,12 +27,12 @@
 .page::after {
   content: '';
   position: absolute;
-  top: 960px; 
+  top: 100vh; 
   left: 0;
   right: 0;
   bottom: 0;
   background-color: #FFFFFF;
-  z-index: 0; /* Под контентом, но поверх градиента */
+  z-index: 0; 
 }
 
 .header {
@@ -46,7 +46,7 @@
   text-transform: uppercase;
   padding-block: clamp(120px, 18vh, 129px);
   padding-inline: clamp(16px, 4vw, 122.5px);
-  margin-block-start: 100px;
+  margin-block-start: 98px;
   margin-block-end: 98px;
   position: relative; /* Поверх оверлея */
   z-index: 1;
@@ -55,38 +55,35 @@
 .title {
   font-size: clamp(3.0625rem, 2.7104rem + 1.5023vw, 4.0625rem);
   margin-block-end: 20px;
-  max-inline-size: 100%;
 }
 
 .subtitle {
   font-size: clamp(0.875rem, 0.6769rem + 0.8451vw, 1.4375rem);
-  max-inline-size: 100%;
 }
 
 .main {
-  inline-size: 100vw;
-  display: grid;
-  grid-template-columns: 1fr;
-  justify-items: center;
+  inline-size: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 50px;
-  position: relative; /* Поверх оверлея */
+  position: relative;
   z-index: 1;
   padding-block-end: 100px;
 }
 
-/*список*/
-.card {
+/*секция*/
+.cards {
+  inline-size: 100%;
   font-family: var(--main-font);
-  list-style: none;
   display: flex;
-  gap: 50px;
+  gap: 49px;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
 }
 
 /*карточка*/
-.card_item {
+.card {
   background-color: #FFFFFF;
   inline-size: var(--inline-size);
   border: 2px solid #000000;
@@ -95,24 +92,28 @@
   grid-template-columns: 1fr;
 }
 
-.card-title {
+.card__title {
+  font-variation-settings: 'wght' 715;
   font-size: 18px;
-  font-weight: 715;
   margin: 5px 10px;
 }
 
 .card__image {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
   object-position: center;
+  display: block;
 }
 
-.image-container {
+
+.card__image-container {
   position: relative;
+  border-top: 2px solid #000000;
+  border-bottom: 2px solid #000000;
 }
 
-.image-label {
+.card__image-label {
   position: absolute;
   z-index: 1;
   top: 25px; 
@@ -127,7 +128,7 @@
 }
 
 @supports ((text-stroke: 1px var(--stroke-color)) or (-webkit-text-stroke: 1px var(--stroke-color))) {
-    .image-label {
+    .card__image-label {
         color: transparent; /* Делаем основной текст прозрачным */
         -webkit-text-stroke: 1px var(--stroke-color); /* Для WebKit-браузеров */
         text-shadow: none; /* Отключаем text-shadow если поддерживается text-stroke */
@@ -135,7 +136,7 @@
 }
 
 @supports not (-webkit-text-stroke: 1px var(--stroke-color)) {
-    .image-label {
+    .card__image-label {
         color: #000000;
         text-shadow: 
             -1px -1px 0 var(--stroke-color),
@@ -147,6 +148,7 @@
 }
 
 .card__description {
+  line-height: 21px;
   margin-inline: 25px;
   margin-block-start: 22px;
   margin-block-end: 23px;
@@ -154,34 +156,34 @@
 
 .card__placeholder {
   margin: 0 25px 25px 25px;
+  line-height: 21px;
 }
 
 /*кнопки*/
 .card__buttons {
-  justify-self: end;
   display: flex;
   gap: 10px;
-  margin: 5px 25px 30px 25px;
+  margin-inline: 25px;
+  margin-block-end: 28px;
+  justify-content: flex-end;
+  align-items: center;
 }
 
-.card__icon-button,
-.card__like-button  {
+.card__icon-button {
   inline-size: fit-content;
   background: transparent;
-  padding: 0;
+  padding: 4px;
   cursor: pointer;
   border: none;
 }
 
-.like-icon {
-  align-self: center;
-}
-
-.button__text {
+.card__like-button {
+  border: 2px solid #000000;  
+  padding: 9px 35px;          
+  background: transparent;
+  cursor: pointer;
   font-family: var(--accent-font);
-  border: 2px solid #000000;
   font-size: 14px;
-  padding: 9px 35px;
 }
 
 /*сохранить на память*/
@@ -210,6 +212,11 @@
   font-family: var(--accent-font);
   text-transform: uppercase;
   font-size: 14px;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  gap: 30px 20px;
+  align-items: center;
+  padding: 29px;
 }
 
 
@@ -217,15 +224,15 @@
   background-color: rgba(0, 0, 0, 0.75);
 }
 
+.page:has(.memory-dialog[open])::after {
+  display: none;
+}
+
 .memory-dialog[open] {
   position: fixed;
-  top: 43%;
   display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto auto;
-  gap: 30px 20px;
-  align-items: center;
-  padding: 29px;
+  inset: 0;
+  margin: auto;
 }
 
 .dialog-icon {
@@ -288,83 +295,67 @@
   filter: saturate(1.4) brightness(1.5) contrast(1.15);
 }
 
-/*эфекты кнопок*/
+/*эфекты кнопок
 .card__like-button:focus,
-.memory-button:focus,
-.dialog-button:focus {
-  outline: none; /* Отменяем стандартную обводку */
-  box-shadow: 2px 2px 0 var(--accent-color, #000000); /* Тень: 2px по X, 2px по Y, без размытия, акцентный цвет */
+.memory-button:focus {
+  outline: none; 
+  box-shadow: 2px 2px 0 var(--accent-color, #000000);
 }
 
 .card__like-button:not(:focus),
-.memory-button:not(:focus),
-.dialog-button:not(:focus) {
+.memory-button:not(:focus) {
   box-shadow: none;
   transition: box-shadow 0.3s ease;
 }
 
 .card__like-button,
-.memory-button,
-.dialog-button {
+.memory-button {
   transition: box-shadow 0.3s ease;
 }
 
 .card__like-button::before,
-.memory-button::before,
-.dialog-button::before {
-    content: ''; /* Обязательное свойство для псевдоэлемента */
+.memory-button::before {
+    content: '';
     position: absolute;
-    inset: 0; /* Занимает всю область кнопки */
+    inset: 0; 
     background-color: var(--accent-color, #000000);
-    z-index: -1; /* Помещаем под текст кнопки */
-    transform: scaleX(0); /* Начальное состояние: сжато по горизонтали */
-    transform-origin: left center; /* Точка начала трансформации - слева */
-    transition: transform 0.5s ease-in-out; /* Плавность в основном селекторе */
-}
-
-/* Позиционируем кнопки относительно для псевдоэлемента */
-.card__like-button,
-.memory-button,
-.dialog-button {
-    position: relative; /* Для позиционирования псевдоэлемента */
-    overflow: visible; /* Или hidden, если выберем translate вариант */
-    z-index: 1; /* Чтобы текст был поверх псевдоэлемента */
-}
-
-/* Анимация псевдоэлемента при наведении */
-.card__like-button:hover::before,
-.memory-button:hover::before,
-.dialog-button:hover::before {
-    transform: scaleX(1); /* Разворачиваем до полной ширины */
+    z-index: -1;
+    transform: scaleX(0); 
+    transform-origin: left center; 
+    transition: transform 0.5s ease-in-out; 
 }
 
 .card__like-button,
-.memory-button,
-.dialog-button {
-    background-color: var(--button-bg); /* Белый фон кнопки */
-    color: var(--text-color); /* Белый цвет текста (будет инвертирован) */
-}
-
-/* Делаем вложенные span относительно спозиционированными */
-.card__like-button .button__text,
-.memory-button .memory-button__text,
-.dialog-button {
+.memory-button {
     position: relative;
-    z-index: 2; /* Выше псевдоэлемента (z-index: -1) и кнопки (z-index: 1) */
-    mix-blend-mode: difference; /* Режим смешивания для инвертирования цвета */
+    overflow: visible;
+    z-index: 1;
 }
 
-/* Применяем mix-blend-mode к иконке дискеты в кнопке "Сохранить на память" */
+.card__like-button:hover::before,
+.memory-button:hover::before {
+    transform: scaleX(1);
+}
+
+.card__like-button,
+.memory-button {
+    background-color: var(--button-bg);
+    color: var(--text-color); 
+}
+
+.card__like-button .button__text {
+    position: relative;
+    z-index: 2;
+    mix-blend-mode: difference;
+}
+
 .memory-button .icon {
     position: relative;
     z-index: 2;
-    mix-blend-mode: difference; /* Иконка тоже инвертируется */
+    mix-blend-mode: difference; 
 }
 
-/* Псевдоэлемент остается черным (акцентный цвет) */
 .card__like-button::before,
-.memory-button::before,
-.dialog-button::before {
-    background-color: var(--accent-color, #000000); /* Черный фон */
-    /* остальные свойства из предыдущего дополнения остаются */
-}
+.memory-button::before {
+    background-color: var(--accent-color, #000000); 
+}*/

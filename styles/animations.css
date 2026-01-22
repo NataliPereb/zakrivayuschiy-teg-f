@@ -81,3 +81,20 @@
     opacity: 0;
   }
 }
+
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.25);
+  }
+}
+
+.like-icon {
+  transform-origin: center;
+}
+
+.like-icon.is-liked .heart {
+  animation: scale 0.3s ease-in 0.1s;
+}

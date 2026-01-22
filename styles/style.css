@@ -1,5 +1,4 @@
 /* Здесь вы напишете основную часть стилей страницы.
-
 Будьте внимательны! Для корректной работы скриптов на этом сайте нужно, чтобы в HTML некоторые классы были названы особым образом:
 ✦ like-icon — для svg-иконки анимированного сердца
 ✦ card__like-button — для кнопки Like рядом с иконкой
@@ -13,7 +12,7 @@
   min-inline-size: 320px;
   min-block-size: 100dvb;
   font-family: var(--main-font, sans-serif);
-  font-variation-settings: 'wght' var(--font-weight-text, 400);
+  font-variation-settings: "wght" var(--font-weight-text, 400);
   background-image: var(--gradient-background);
   background-attachment: fixed;
   background-size: cover;
@@ -25,19 +24,19 @@
 }
 
 .page::after {
-  content: '';
+  content: "";
   position: absolute;
-  top: 100vh; 
+  top: 100vh;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #FFFFFF;
-  z-index: 0; 
+  background-color: #ffffff;
+  z-index: 0;
 }
 
 .header {
   inline-size: var(--inline-size);
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border: 2px solid #000000;
   text-align: center;
   font-family: var(--accent-font, sans-serif);
@@ -84,7 +83,7 @@
 
 /*карточка*/
 .card {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   inline-size: var(--inline-size);
   border: 2px solid #000000;
   font-size: 18px;
@@ -93,7 +92,7 @@
 }
 
 .card__title {
-  font-variation-settings: 'wght' 715;
+  font-variation-settings: "wght" 715;
   font-size: 18px;
   margin: 5px 10px;
 }
@@ -106,17 +105,14 @@
   display: block;
 }
 
-
 .card__image-container {
   position: relative;
-  border-top: 2px solid #000000;
-  border-bottom: 2px solid #000000;
 }
 
 .card__image-label {
   position: absolute;
   z-index: 1;
-  top: 25px; 
+  top: 25px;
   right: 25px;
   text-transform: uppercase;
   font-family: var(--accent-font);
@@ -127,31 +123,34 @@
   mix-blend-mode: hard-light;
 }
 
-@supports ((text-stroke: 1px var(--stroke-color)) or (-webkit-text-stroke: 1px var(--stroke-color))) {
-    .card__image-label {
-        color: transparent; /* Делаем основной текст прозрачным */
-        -webkit-text-stroke: 1px var(--stroke-color); /* Для WebKit-браузеров */
-        text-shadow: none; /* Отключаем text-shadow если поддерживается text-stroke */
-    }
+@supports (
+  (text-stroke: 1px var(--stroke-color)) or
+    (-webkit-text-stroke: 1px var(--stroke-color))
+) {
+  .card__image-label {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--stroke-color);
+    text-shadow: none;
+  }
 }
 
 @supports not (-webkit-text-stroke: 1px var(--stroke-color)) {
-    .card__image-label {
-        color: #000000;
-        text-shadow: 
-            -1px -1px 0 var(--stroke-color),
-            1px -1px 0 var(--stroke-color),
-            -1px 1px 0 var(--stroke-color),
-            1px 1px 0 var(--stroke-color),
-            0 0 2px var(--stroke-color);
-    }
+  .card__image-label {
+    color: #000000;
+    text-shadow:
+      -1px -1px 0 var(--stroke-color),
+      1px -1px 0 var(--stroke-color),
+      -1px 1px 0 var(--stroke-color),
+      1px 1px 0 var(--stroke-color),
+      0 0 2px var(--stroke-color);
+  }
 }
 
 .card__description {
   line-height: 21px;
   margin-inline: 25px;
-  margin-block-start: 22px;
-  margin-block-end: 23px;
+  margin-block-start: 25px;
+  margin-block-end: 25px;
 }
 
 .card__placeholder {
@@ -162,24 +161,43 @@
 /*кнопки*/
 .card__buttons {
   display: flex;
-  gap: 10px;
   margin-inline: 25px;
-  margin-block-end: 28px;
+  margin-block-end: 25px;
   justify-content: flex-end;
   align-items: center;
+  gap: 4px;
 }
 
 .card__icon-button {
   inline-size: fit-content;
   background: transparent;
-  padding: 4px;
   cursor: pointer;
-  border: none;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease;
+  outline: none;
+  padding: 0;
+  max-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card__icon-button .like-icon {
+  display: block;
+}
+
+.card__icon-button:focus-visible {
+  border-color: var(--accent-color, #000000);
+}
+
+/* Убираем outline при обычном фокусе */
+.card__icon-button:focus {
+  outline: none;
 }
 
 .card__like-button {
-  border: 2px solid #000000;  
-  padding: 9px 35px;          
+  border: 2px solid #000000;
+  padding: 10px 35px;
   background: transparent;
   cursor: pointer;
   font-family: var(--accent-font);
@@ -187,9 +205,12 @@
 }
 
 /*сохранить на память*/
-.icon {
+.memory-button .icon {
   inline-size: 21px;
   block-size: 21px;
+  fill: var(--text-color, #ffffff);
+  position: relative;
+  z-index: 1;
 }
 
 .memory-button {
@@ -201,14 +222,25 @@
   font-size: 14px;
   font-weight: 400;
   background-color: transparent;
+  color: var(--accent-color, #000000);
+}
+
+@media (width <= 375px) {
+  .memory-button .icon {
+    inline-size: 28px;
+    block-size: 28px;
+  }
+
+  .memory-button {
+    flex-direction: column;
+  }
 }
 
 /*Диалоговое окно*/
-
 .memory-dialog {
-  display: none; /* По требованию задания */
+  display: none;
   border: 2px solid #000000;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   font-family: var(--accent-font);
   text-transform: uppercase;
   font-size: 14px;
@@ -218,7 +250,6 @@
   align-items: center;
   padding: 29px;
 }
-
 
 .memory-dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.75);
@@ -280,82 +311,58 @@
 }
 
 .filter-alternative {
-  filter: 
-    grayscale(0.6)      
-    brightness(0.85)    
-    contrast(1.2)       
-    blur(0.5px);        
+  filter: grayscale(0.6) brightness(0.85) contrast(1.2) blur(0.5px);
 }
 
 .filter-exhaustion {
-  filter: blur(5px)
+  filter: blur(5px);
 }
 
 .filter-achievement {
   filter: saturate(1.4) brightness(1.5) contrast(1.15);
 }
 
-/*эфекты кнопок
+/* Основные стили для всех трех кнопок */
+.card__like-button,
+.memory-button,
+.dialog-button {
+  position: relative;
+  background-color: var(--button-bg, #ffffff);
+  color: var(--text-color, #ffffff);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+.card__like-button::after,
+.memory-button::after,
+.dialog-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: var(--accent-color, #000000);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.5s ease-in-out;
+}
+
 .card__like-button:focus,
-.memory-button:focus {
-  outline: none; 
+.memory-button:focus,
+.dialog-button:focus {
+  outline: none;
   box-shadow: 2px 2px 0 var(--accent-color, #000000);
 }
 
-.card__like-button:not(:focus),
-.memory-button:not(:focus) {
-  box-shadow: none;
-  transition: box-shadow 0.3s ease;
+.card__like-button:hover::after,
+.memory-button:hover::after,
+.dialog-button:hover::after {
+  transform: scaleX(1);
 }
 
-.card__like-button,
-.memory-button {
-  transition: box-shadow 0.3s ease;
+.card__like-button .button__text,
+.memory-button .button__text,
+.dialog-button .button__text {
+  position: relative;
+  z-index: 1;
+  mix-blend-mode: difference;
 }
-
-.card__like-button::before,
-.memory-button::before {
-    content: '';
-    position: absolute;
-    inset: 0; 
-    background-color: var(--accent-color, #000000);
-    z-index: -1;
-    transform: scaleX(0); 
-    transform-origin: left center; 
-    transition: transform 0.5s ease-in-out; 
-}
-
-.card__like-button,
-.memory-button {
-    position: relative;
-    overflow: visible;
-    z-index: 1;
-}
-
-.card__like-button:hover::before,
-.memory-button:hover::before {
-    transform: scaleX(1);
-}
-
-.card__like-button,
-.memory-button {
-    background-color: var(--button-bg);
-    color: var(--text-color); 
-}
-
-.card__like-button .button__text {
-    position: relative;
-    z-index: 2;
-    mix-blend-mode: difference;
-}
-
-.memory-button .icon {
-    position: relative;
-    z-index: 2;
-    mix-blend-mode: difference; 
-}
-
-.card__like-button::before,
-.memory-button::before {
-    background-color: var(--accent-color, #000000); 
-}*/

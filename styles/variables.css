@@ -20,7 +20,10 @@
     --inline-size: min(100vw, 700px);
     --shadow-focus: 2px 2px 0 var(--accent-color);
     --accent-color: #000000;
-    --text-color: #FFFFFF;     /* Белый цвет текста */
+    --text-color: #FFFFFF;
     --button-bg: #FFFFFF;
-    --stroke-color:  #FFFFFF; /* Цвет обводки текста */
+    --stroke-color:  #FFFFFF;
+    --contour-color: #000000;
+    --animation-fill-color: #FF0000;
+    --heart-fill-color: #FF0000;
 }

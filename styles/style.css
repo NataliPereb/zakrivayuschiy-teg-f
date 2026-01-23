@@ -23,17 +23,6 @@
   position: relative;
 }
 
-.page::after {
-  content: "";
-  position: absolute;
-  top: 100vh;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ffffff;
-  z-index: 0;
-}
-
 .header {
   inline-size: var(--inline-size);
   background-color: #ffffff;
@@ -43,9 +32,8 @@
   font-weight: 400;
   font-style: normal;
   text-transform: uppercase;
-  padding-block: clamp(120px, 18vh, 129px);
-  padding-inline: clamp(16px, 4vw, 122.5px);
-  margin-block-start: 98px;
+  padding: clamp(120px, calc(108.769px + 2.460vw), 130px) clamp(16px, calc(-106.308px + 32.615vw), 122px);
+  margin-block-start: 100px;
   margin-block-end: 98px; /*тут*/
   position: relative; /* Поверх оверлея */
   z-index: 1;
@@ -104,6 +92,7 @@
   object-fit: cover;
   object-position: center;
   display: block;
+  aspect-ratio: 1 / 1;
 }
 
 .card__image-container {
@@ -202,16 +191,14 @@
   cursor: pointer;
   font-family: var(--accent-font);
   font-size: 14px;
+  max-inline-size: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 /*сохранить на память*/
-.memory-button .icon {
-  inline-size: 21px;
-  block-size: 21px;
-  fill: var(--text-color, #ffffff);
-  position: relative;
-  z-index: 1;
-}
 
 .memory-button {
   display: flex;
@@ -222,7 +209,12 @@
   font-size: 14px;
   font-weight: 400;
   background-color: transparent;
-  color: var(--accent-color, #000000);
+  border: 2px solid var(--accent-color, #000000);
+}
+
+.memory-button .icon {
+  inline-size: 21px;
+  block-size: 21px;
 }
 
 @media (width <= 375px) {
@@ -291,22 +283,23 @@
   background-color: transparent;
   border: 2px solid #000000;
   padding: 9px 130px;
+  text-transform: uppercase;
 }
 
 /*фильтры*/
-.filter-clean {
+.filter-contrast-low {
   filter: contrast(20%);
 }
 
-.filter-doubt {
+.filter-hue-dim {
   filter: hue-rotate(-10deg) contrast(1) brightness(0.7);
 }
 
-.filter-perfection {
+.filter-vibrant {
   filter: contrast(1.5) saturate(1.15) brightness(1);
 }
 
-.filter-community {
+.filter-warm {
   filter: sepia(0.3) brightness(1.05) saturate(1.1);
 }
 
@@ -314,18 +307,16 @@
   filter: grayscale(0.6) brightness(0.85) contrast(1.2) blur(0.5px);
 }
 
-.filter-exhaustion {
+.filter-blur-heavy {
   filter: blur(5px);
 }
 
-.filter-achievement {
+.filter-super-vibrant {
   filter: saturate(1.4) brightness(1.5) contrast(1.15);
 }
 
 /* Основные стили для всех трех кнопок */
-.card__like-button,
-.memory-button,
-.dialog-button {
+.button {
   position: relative;
   background-color: var(--button-bg, #ffffff);
   color: var(--text-color, #ffffff);
@@ -333,9 +324,7 @@
   transition: box-shadow 0.3s ease;
 }
 
-.card__like-button::after,
-.memory-button::after,
-.dialog-button::after {
+.button::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -346,22 +335,16 @@
   transition: transform 0.5s ease-in-out;
 }
 
-.card__like-button:focus,
-.memory-button:focus,
-.dialog-button:focus {
+.button:focus{
   outline: none;
   box-shadow: 2px 2px 0 var(--accent-color, #000000);
 }
 
-.card__like-button:hover::after,
-.memory-button:hover::after,
-.dialog-button:hover::after {
+.button:hover::after {
   transform: scaleX(1);
 }
 
-.card__like-button .button__text,
-.memory-button .button__text,
-.dialog-button .button__text {
+.button .button__text {
   position: relative;
   z-index: 1;
   mix-blend-mode: difference;

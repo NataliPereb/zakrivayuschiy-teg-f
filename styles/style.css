@@ -212,10 +212,20 @@
   border: 2px solid var(--accent-color, #000000);
 }
 
+.icon use,
+.dialog-icon use {
+  color: #000000;
+}
+
 .memory-button .icon {
   inline-size: 21px;
   block-size: 21px;
+  color: #000000;/* Черный цвет по умолчанию */
+  position: relative;
+  z-index: 1;
+  mix-blend-mode: normal;
 }
+
 
 @media (width <= 375px) {
   .memory-button .icon {
@@ -263,6 +273,7 @@
   height: 39px;
   grid-row: 1;
   grid-column: 1;
+  color: #000000;
 }
 
 .dialog-text {
